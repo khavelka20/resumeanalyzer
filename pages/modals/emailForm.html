@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title text-center"> <i class="fa fa-unlock"></i> Unlock Your Free Report!</h3>
+</div>
+<div class="modal-body">
+    <form name="emailForm" ng-submit="sendEmail()">
+        <p class="text-center">
+            Please enter your email address into the box below. And you will get instant access to your free resume analysis.
+        </p>
+        <input class="form-control border-input" type="email" placeholder="Email Address" ng-model="emailAddress" required />
+        <br/>
+        <button type="submit" class="btn btn-block btn-success" ng-disabled="emailForm.$invalid">Submit</button>
+        <br>
+        <p class="text-center">
+            We guarantee 100% privacy. Your information will not be shared.
+        </p>
+    </form>
+    <div ng-show="emailError" class="alert alert-danger">
+        <p>There was a problem with processing your email address</p>
+    </div>
+</div>

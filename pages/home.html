@@ -1,0 +1,79 @@
+<h3>Step 1 : Federal Job Posting</h3>
+<hr/>
+<p>Search USAjobs.gov.  Find a job posting.  Copy and Paste the control number of the posting into the box below. We will then try and get the necessary information from the posting for you.</p>
+<a href="#/report" class="btn btn-block btn-primary" ng-show="analyzerViewModel.status === 'analyzed'">Back to Report</a>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-left"><strong>Posting Control Number</strong> <i ng-show="analyzerViewModel.postingControlNumber" class="fa fa-check-square text-success"></i></div>
+                <div class="pull-right"><button ng-click="open('postingControlNumberHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">                
+                <p>Enter the Control number of the job posting in the box below and we'll grab the important information from it.</p>
+                <input ng-model="analyzerViewModel.postingControlNumber" class="form-control" placeholder="Posting Control Number"/>
+                <br/>
+                <button ng-click="getPosting()" ng-disabled="!analyzerViewModel.postingControlNumber" class="btn btn-primary">Get Posting <i class="fa fa-spinner fa-spin" ng-show="analyzerViewModel.loadingJobPosting"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="analyzerViewModel.dutiesText || analyzerViewModel.manualDataEntryRequired">
+    <!-- Duties Section from the federal job posting -->
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-left"><strong>Duties</strong> <i ng-show="analyzerViewModel.dutiesText" class="fa fa-check-square text-success"></i></div>
+                <div class="pull-right"><button ng-click="open('dutiesHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <textarea ng-model="analyzerViewModel.dutiesText" class="resume-analyzer job-posting">
+                    
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <!-- End Duties Section -->
+    <!-- Preferred Qualifications Section from the federal job posting -->
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-left"><strong>Preferred Qualifications</strong> <i ng-show="analyzerViewModel.qualificationsText" class="fa fa-check-square text-success"></i></div>
+                <div class="pull-right"><button ng-click="open('qualificationsHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">                
+                <textarea ng-model="analyzerViewModel.qualificationsText" class="resume-analyzer job-posting">
+                    
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <!-- End Preferred Qualifications Section -->
+</div>
+
+<h3>Step 2 : Your Resume</h3>
+<hr>
+<p>Please paste your resume into the box provided below.</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-left"><strong>Your Resume</strong> <i ng-show="analyzerViewModel.resumeText" class="fa fa-check-square text-success"></i></div>
+                <div class="pull-right"><button ng-click="open('resumeHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <p>When copying your resume do not include your name, address or any references.</p>
+                <textarea ng-model="analyzerViewModel.resumeText" class="resume-analyzer resume">
+
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<button ng-click="startAnalysis()" class="btn btn-block btn-success">Analyze</button>
+<br>

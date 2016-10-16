@@ -1,0 +1,34 @@
+#analyzing{
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 1;
+}
+
+textarea.resume-analyzer{
+    width: 100%;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+textarea.resume-analyzer.job-posting{
+    height:200px;
+}
+
+textarea.resume-analyzer.resume{
+    height:400px;
+}
+
+.nav-tabs>li a,.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus,nav-tabs>li.active>a:hover{
+    border:1px solid #eee;
+}
+
+.nav-tabs{
+    border-bottom:1px solid #eee;
+}
+.panel-heading{font-weight: bold;font-size: 16px;}

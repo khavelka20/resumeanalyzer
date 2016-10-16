@@ -1,0 +1,205 @@
+<div style="position: relative;">
+    <h3>Report</h3>
+    <div ng-show="analyzerViewModel.loading" id="analyzing">
+        <h1>Analyzing <i class="fa fa-spinner fa-spin"></i></h1>
+    </div>
+    <uib-tabset>
+        <uib-tab>
+            <uib-tab-heading>
+                <i class="fa fa-briefcase"></i> Job Posting Analysis
+            </uib-tab-heading>
+            <br/>
+            <h4>Federal Job Posting Analysis</h4>
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Job Posting Raw Text</strong></div>
+                            <div class="pull-right"><button ng-click="open('jobPostingRawTextHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                {{analyzerViewModel.fullPostText}}
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Job Posting Key Words</strong></div>
+                            <div class="pull-right"><button ng-click="open('jobPostingKeyWordsHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Keyword</th>
+                                        <th>Relevance</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="model in analyzerViewModel.postTextAnalysis.keyWords">
+                                    <td>{{model.text}}</td>
+                                    <td>{{model.relevance | percentage:2}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Job Posting Key Word Analysis</strong></div>
+                            <div class="pull-right"><button ng-click="open('jobPostingKeyWordsAnalysisHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <h5 class="text-center">Top 5 keywords by relevance and # of occurrences</h5>
+                            <canvas class="chart chart-doughnut" chart-data="analyzerViewModel.jobPostingData" chart-labels="analyzerViewModel.jobPostingLabels" chart-legend="true"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab>
+            <uib-tab-heading>
+                <i class="fa fa-file-text-o"></i> Resume Analysis
+            </uib-tab-heading>
+            <br/>
+            <h4>Resume Analysis</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Resume Raw Text</strong></div>
+                            <div class="pull-right"><button ng-click="open('resumeRawTextHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                {{analyzerViewModel.resumeText}}
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Resume Key Words</strong></div>
+                            <div class="pull-right"><button ng-click="open('resumeKeyWordsHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Keyword</th>
+                                        <th>Relevance</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="model in analyzerViewModel.resumeTextAnalysis.keyWords">
+                                    <td>{{model.text}}</td>
+                                    <td>{{model.relevance | percentage:2}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Resume Key Word Analysis</strong></div>
+                            <div class="pull-right"><button ng-click="open('resumeKeyWordsAnalysisHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <h5 class="text-center">Top 5 keywords by relevance and # of occurrences</h5>
+                            <canvas class="chart chart-doughnut" chart-data="analyzerViewModel.resumeData" chart-labels="analyzerViewModel.resumeLabels" chart-legend="true"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab>
+            <uib-tab-heading>
+                <i class="fa fa-pencil-square-o"></i> Your Resume Score
+            </uib-tab-heading>
+            <br/>
+            <h4>Your Resume Score</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Overall Score</strong></div>
+                            <div class="pull-right"><button ng-click="open('resumeOverallScoreHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <h1 class="text-{{analyzerViewModel.resumeScore.overallScore.letterGradeClass}}">{{analyzerViewModel.resumeScore.overallScore.numberGrade}}% {{analyzerViewModel.resumeScore.overallScore.letterGrade}}</h1>
+                            <p>{{analyzerViewModel.resumeScore.overallScore.letterGradeExplanation}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Matches</strong></div>
+                            <div class="pull-right"><button ng-click="open('resumeMatchesHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Keyword</th>
+                                        <th>Relevance</th>
+                                        <th># of matches</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="model in analyzerViewModel.resumeScore.matchedKeywords">
+                                    <td>{{model.keyWord}}</td>
+                                    <td>{{model.relevance | percentage:2}}</td>
+                                    <td>{{model.occurrences}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pull-left"><strong>Misses</strong></div>
+                            <div class="pull-right"><button ng-click="open('resumeMissesHelp')" class="btn btn-xs btn-primary">Help</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Keyword</th>
+                                        <th>Relevance</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="model in analyzerViewModel.resumeScore.missedKeywords">
+                                    <td>{{model.keyWord}}</td>
+                                    <td>{{model.relevance | percentage:2}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>
