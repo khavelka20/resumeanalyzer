@@ -9,8 +9,8 @@ The resume analyzer tool automatically pulls in the job description from a job p
 
 This tool saved the client approx 30 mins per sales lead, helping to decrease their customer acquisition cost.
 
+
 ## Stack Used
-##Stack Used
 <ul>
 <li>Charts.js</li>
 <li>AngularJS</li>
